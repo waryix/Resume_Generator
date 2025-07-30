@@ -1,0 +1,24 @@
+{
+    "name": "Waris Rashid",
+    "email": "waris@example.com",
+    "phone": "9999999999",
+    "linkedin": "https://linkedin.com/in/waris",
+    "objective": "To work as a software developer...",
+    "education": [
+      {
+        "degree": "B.Tech CSE",
+        "institution": "XYZ University",
+        "year": "2025"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Intern",
+        "company": "ABC Corp",
+        "years": "2024"
+      }
+    ],
+    "skills": ["Python", "React", "SQL"],
+    "format": "pdf"
+  }
+  

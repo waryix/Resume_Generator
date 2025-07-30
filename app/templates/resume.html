@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Resume</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1 style="text-align: center;">Welcome, {{ current_user.username }}</h1>
+    
+    <!-- Navigation -->
+    <div style="text-align: center; margin: 1rem 0;">
+        <a href="{{ url_for('routes.resume') }}" class="btn">Edit Resume</a>
+        <a href="{{ url_for('routes.view_resume') }}" class="btn">View Resume</a>
+        <a href="{{ url_for('routes.download_pdf') }}" class="btn">Download PDF (Basic)</a>
+        <a href="{{ url_for('routes.download_pdf_html') }}" class="btn">Download PDF (Styled)</a>
+        <a href="{{ url_for('routes.download_docx') }}" class="btn">Download DOCX</a>
+        <a href="{{ url_for('routes.logout') }}" class="btn">Logout</a>
+    </div>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="form-container">
+                {% for category, message in messages %}
+                    <p class="{{ category }}"><strong>{{ category.title() }}:</strong> {{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Resume Form -->
+    <form method="POST" class="form-container" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                {{ form.full_name.label }} {{ form.full_name() }}
+                {{ form.email.label }} {{ form.email() }}
+                {{ form.phone.label }} {{ form.phone() }}
+                {{ form.address.label }} {{ form.address() }}
+            </div>
+            <div>
+                {{ form.github.label }} {{ form.github() }}
+                {{ form.linkedin.label }} {{ form.linkedin() }}
+                {{ form.layout.label }} {{ form.layout() }}
+            </div>
+        </div>
+
+        {{ form.education.label }} {{ form.education() }}
+        {{ form.skills.label }} {{ form.skills() }}
+        {{ form.interpersonal_skills.label }} {{ form.interpersonal_skills() }}
+        {{ form.experience.label }} {{ form.experience() }}
+        {{ form.certificates.label }} {{ form.certificates() }}
+        {{ form.profile_image.label }} {{ form.profile_image() }}
+        {{ form.submit(class="btn") }}
+        <a href="{{ url_for('routes.generate_resume') }}" class="btn">✨ Generate AI Resume</a>
+
+        {% if resume %}
+            <br><br>
+            <a href="{{ url_for('routes.view_resume') }}" class="btn">👁️ Preview Resume</a>
+            <a href="{{ url_for('routes.download_pdf_html') }}" class="btn">⬇️ Download PDF</a>
+            <a href="{{ url_for('routes.download_docx') }}" class="btn">⬇️ Download DOCX</a>
+        {% endif %}
+    </form>
+
+    {% if resume %}
+    <div class="form-container" style="margin-top: 2rem;">
+        <h2>Your Saved Resume</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                {% if resume.profile_image %}
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="{{ url_for('static', filename='uploads/' + resume.profile_image) }}" 
+                         alt="Profile Image" 
+                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ddd;">
+                </div>
+                {% endif %}
+                <p><strong>Name:</strong> {{ resume.full_name }}</p>
+                <p><strong>Email:</strong> {{ resume.email }}</p>
+                <p><strong>Phone:</strong> {{ resume.phone }}</p>
+                <p><strong>Address:</strong></p>
+                <div style="white-space: pre-line; margin-left: 20px;">{{ resume.address }}</div>
+            </div>
+            <div>
+                {% if resume.github %}
+                <p><strong>GitHub:</strong> <a href="{{ resume.github }}" target="_blank">{{ resume.github }}</a></p>
+                {% endif %}
+                {% if resume.linkedin %}
+                <p><strong>LinkedIn:</strong> <a href="{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a></p>
+                {% endif %}
+                <p><strong>Layout:</strong> {{ resume.layout }}</p>
+            </div>
+        </div>
+
+        <p><strong>Education:</strong></p>
+        <div style="white-space: pre-line; margin-left: 20px;">{{ resume.education }}</div>
+        
+        <p><strong>Technical Skills:</strong></p>
+        <div style="white-space: pre-line; margin-left: 20px;">{{ resume.skills }}</div>
+        
+        <p><strong>Interpersonal Skills:</strong></p>
+        <div style="white-space: pre-line; margin-left: 20px;">{{ resume.interpersonal_skills }}</div>
+        
+        <p><strong>Experience:</strong></p>
+        <div style="white-space: pre-line; margin-left: 20px;">{{ resume.experience }}</div>
+        
+        {% if resume.certificates %}
+        <p><strong>Certificates:</strong></p>
+        <div style="white-space: pre-line; margin-left: 20px;">{{ resume.certificates }}</div>
+        {% endif %}
+    </div>
+    {% endif %}

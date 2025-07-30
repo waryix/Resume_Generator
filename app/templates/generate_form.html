@@ -1,0 +1,40 @@
+<!-- app/templates/generate_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Generate AI Resume</h1>
+
+        <!-- Show flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}"><strong>{{ category.title() }}:</strong> {{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label for="job_title">Job Title:</label>
+            <input type="text" name="job_title" required>
+
+            <label for="skills">Skills (comma-separated):</label>
+            <textarea name="skills" required></textarea>
+
+            <label for="experience">Experience:</label>
+            <textarea name="experience" required></textarea>
+
+            <label>Prompt Instruction</label>
+            <textarea name="prompt_instruction" rows="5" placeholder="e.g. Create a resume with Objective, Skills, and Experience sections..."></textarea>
+
+            <button type="submit" class="btn">✨ Generate AI Resume</button>
+        </form>
+
+        <a href="{{ url_for('routes.resume') }}" class="btn">← Back</a>
+    </div>
+</body>
+</html>

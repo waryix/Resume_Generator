@@ -1,0 +1,82 @@
+# ======================
+# Python cache and build
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+
+# ===================
+# Virtual Environment
+# ===================
+venv/
+ENV/
+env/
+.venv/
+
+# =====================
+# Flask and app secrets
+# =====================
+instance/
+.env
+*.env
+.env.*
+
+# ==========
+# Log files
+# ==========
+*.log
+logs/
+*.sqlite3
+*.db
+
+# ==========
+# Model files (Hugging Face, Falcon)
+# ==========
+*.ckpt
+*.safetensors
+*.pth
+*.bin
+*.pt
+*.index.json
+*.h5
+*.tar.gz
+*.onnx
+
+# Transformers / HF cache
+~/.cache/huggingface/
+huggingface_cache/
+cache/
+models/
+
+# If using Datasets
+~/.cache/datasets/
+datasets_cache/
+
+# =================
+# OS-generated junk
+# =================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Editor/IDE settings
+# =====================
+.vscode/
+.idea/
+*.code-workspace
+
+# =====================
+# Temporary/resume files
+# =====================
+*.pdf
+*.docx
+static/uploads/
+resume_outputs/

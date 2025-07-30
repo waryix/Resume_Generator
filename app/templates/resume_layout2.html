@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ resume.full_name }}'s Resume - Layout 2</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 40px;
+            background-color: #f2f2f2;
+        }
+        .resume-container {
+            background-color: white;
+            padding: 30px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <h1>{{ resume.full_name }}</h1>
+        <p><strong>Email:</strong> {{ resume.email }}</p>
+        <p><strong>Phone:</strong> {{ resume.phone }}</p>
+        <p><strong>Address:</strong></p>
+        <div style="white-space: pre-line; margin-left: 20px;">{{ resume.address }}</div>
+        
+        {% if resume.github or resume.linkedin %}
+        <div style="margin: 20px 0;">
+            {% if resume.github %}
+            <p><strong>GitHub:</strong> <a href="{{ resume.github }}" target="_blank">{{ resume.github }}</a></p>
+            {% endif %}
+            {% if resume.linkedin %}
+            <p><strong>LinkedIn:</strong> <a href="{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a></p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="section">
+            <div class="section-title">Education</div>
+            <div style="white-space: pre-line;">{{ resume.education }}</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Technical Skills</div>
+            <div style="white-space: pre-line;">{{ resume.skills }}</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Interpersonal Skills</div>
+            <div style="white-space: pre-line;">{{ resume.interpersonal_skills }}</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Experience</div>
+            <div style="white-space: pre-line;">{{ resume.experience }}</div>
+        </div>
+
+        {% if resume.certificates %}
+        <div class="section">
+            <div class="section-title">Certificates</div>
+            <div style="white-space: pre-line;">{{ resume.certificates }}</div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

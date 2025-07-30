@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ resume.full_name }}'s Resume - Layout 1</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { border-bottom: 2px solid #333; }
+        h2 { margin-top: 30px; }
+        p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>{{ resume.full_name }}</h1>
+    <p><strong>Email:</strong> {{ resume.email }}</p>
+    <p><strong>Phone:</strong> {{ resume.phone }}</p>
+    <p><strong>Address:</strong></p>
+    <div style="white-space: pre-line; margin-left: 20px;">{{ resume.address }}</div>
+    
+    {% if resume.github or resume.linkedin %}
+    <div style="margin: 20px 0;">
+        {% if resume.github %}
+        <p><strong>GitHub:</strong> <a href="{{ resume.github }}" target="_blank">{{ resume.github }}</a></p>
+        {% endif %}
+        {% if resume.linkedin %}
+        <p><strong>LinkedIn:</strong> <a href="{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a></p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <h2>Education</h2>
+    <div style="white-space: pre-line;">{{ resume.education }}</div>
+
+    <h2>Technical Skills</h2>
+    <div style="white-space: pre-line;">{{ resume.skills }}</div>
+
+    <h2>Interpersonal Skills</h2>
+    <div style="white-space: pre-line;">{{ resume.interpersonal_skills }}</div>
+
+    <h2>Experience</h2>
+    <div style="white-space: pre-line;">{{ resume.experience }}</div>
+
+    {% if resume.certificates %}
+    <h2>Certificates</h2>
+    <div style="white-space: pre-line;">{{ resume.certificates }}</div>
+    {% endif %}
+</body>
+</html>

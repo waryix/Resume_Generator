@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your AI-Generated Resume</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 2rem auto;
+            max-width: 800px;
+            line-height: 1.6;
+            background-color: #f7f7f7;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 2rem;
+            text-decoration: none;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI-Generated Resume</h1>
+
+    {% if job_title %}
+    <h2>{{ job_title }}</h2>
+    {% endif %}
+
+    {% if summary %}
+    <h3>Summary</h3>
+    <p>{{ summary }}</p>
+    {% endif %}
+
+    {% if skills %}
+    <h3>Skills</h3>
+    <ul>
+        {% for skill in skills.split(',') %}
+            <li>{{ skill.strip() }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if experience %}
+    <h3>Experience</h3>
+    <ul>
+        {% for line in experience.split('\n') %}
+            {% if line.strip() %}
+                <li>{{ line.strip() }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a href="{{ url_for('routes.generate_resume') }}">⬅️ Generate Another Resume</a>
+
+</body>
+</html>

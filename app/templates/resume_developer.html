@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ resume.full_name }}'s Resume - Developer</title>
+    <style>
+        body {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            margin: 0;
+            padding: 30px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #2d2d30;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #3e3e42;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin: 0 0 25px 0;
+            color: #569cd6;
+            text-align: center;
+            border-bottom: 2px solid #569cd6;
+            padding-bottom: 10px;
+        }
+        .contact-info {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 14px;
+            color: #9cdcfe;
+        }
+        .contact-info p {
+            margin: 8px 0;
+        }
+        .links {
+            margin: 20px 0;
+        }
+        .links a {
+            color: #4ec9b0;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            border-bottom: 1px solid #4ec9b0;
+            padding-bottom: 2px;
+        }
+        .links a:hover {
+            color: #569cd6;
+            border-bottom-color: #569cd6;
+        }
+        h2 {
+            color: #dcdcaa;
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #3e3e42;
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section-content {
+            margin-left: 20px;
+            color: #ce9178;
+            font-size: 14px;
+        }
+        .address {
+            white-space: pre-line;
+            color: #9cdcfe;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .skill-section {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #569cd6;
+        }
+        .code-block {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #3e3e42;
+            margin: 10px 0;
+        }
+        .keyword {
+            color: #569cd6;
+            font-weight: 600;
+        }
+        .string {
+            color: #ce9178;
+        }
+        .comment {
+            color: #6a9955;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if resume.profile_image %}
+        <div style="text-align: center; margin-bottom: 25px;">
+            <img src="{{ url_for('static', filename='uploads/' + resume.profile_image) }}" 
+                 alt="Profile Image" 
+                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #569cd6;">
+        </div>
+        {% endif %}
+        <h1>{{ resume.full_name }}</h1>
+        
+        <div class="contact-info">
+            <p><span class="keyword">Email:</span> <span class="string">{{ resume.email }}</span></p>
+            <p><span class="keyword">Phone:</span> <span class="string">{{ resume.phone }}</span></p>
+            <div class="address">{{ resume.address }}</div>
+            
+            {% if resume.github or resume.linkedin %}
+            <div class="links">
+                {% if resume.github %}
+                <a href="{{ resume.github }}" target="_blank">GitHub</a>
+                {% endif %}
+                {% if resume.linkedin %}
+                <a href="{{ resume.linkedin }}" target="_blank">LinkedIn</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="code-block" style="white-space: pre-line;">{{ resume.education }}</div>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-section">
+                <h2>Technical Skills</h2>
+                <div style="white-space: pre-line;">{{ resume.skills }}</div>
+            </div>
+
+            <div class="skill-section">
+                <h2>Interpersonal Skills</h2>
+                <div style="white-space: pre-line;">{{ resume.interpersonal_skills }}</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <div class="code-block" style="white-space: pre-line;">{{ resume.experience }}</div>
+        </div>
+
+        {% if resume.certificates %}
+        <div class="section">
+            <h2>Certifications</h2>
+            <div class="code-block" style="white-space: pre-line;">{{ resume.certificates }}</div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html> 
